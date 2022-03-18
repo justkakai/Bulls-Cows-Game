@@ -32,7 +32,7 @@ console.log(`Okay ${name.cyan}, let's get right into it, shall we?
 \nEasy 👉 unlimited number of attempts\nDifficult 👉 5 attempts\nLet Me Decide 👉 you decide the number of attempts you'll get`)
 
 // basically the game. 
-do {
+while (restartGame === true) {
     let madeAttempts = 0;
     let attemptsAllowed = 0;
     round++;
@@ -161,7 +161,7 @@ do {
             console.log(`That's okay. Hope to see you again sometime soon 🙋‍♀️`);
         }
     }
-} while (restartGame === true);
+}
 
 // calculation of bulls and cows.
 function calculation() {
