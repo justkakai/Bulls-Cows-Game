@@ -80,37 +80,49 @@ do {
     // validates the player's guess and outputs result.
     function validationAndResult() {
 
+        // checks if guess is an integer and greater than 0
         while (parseInt(guess) < 1 || isNaN(Number(guess))) { // 
             guess = prompt(`Please enter positive integers only. Try again? `);
             if (parseInt(guess) >= 1 || !isNaN(Number(guess))) {
                 validationAndResult();
             }   
         } 
+
+        // checks if all 4 numbers in the player's guess are unique
         while (new Set(guess).size !== guess.length) {
             guess = prompt(`All your digits must be unique. Guess again? `.red);
             if (new Set(guess).size === guess.length) {
                 validationAndResult();
             }
         }
+
+        // checks if the player's guess is 4 digits long
         while (guess.length !== numberLength) {
             guess = prompt(`Oops! Your guess must be ${numberLength} digits long. Try again? `.red);
             if (guess.length === numberLength) {
                 validationAndResult();
             }
         }
+
+        // if guess if correct, calls on the function exitOrContinue() where player chooses to either exit the game or play another round
         if (guess === number) {
             madeAttempts++
             console.log(`\n${guess} IS CORRECT! Congratulations ${name}, you champ! ✨ You guessed correct in just ${madeAttempts} tries!`.yellow);
             newPrompt = prompt(`Care for another round? (y/n) `);
             console.clear();
             exitOrContinue();
+
         } else {
             madeAttempts++;
+
+            // if there are no more attempts left, randomizedNumber is revealed and player is asked to either exit the game or play another round
             if (madeAttempts >= attemptsAllowed) {
                 console.log(`\nAww, that's all the attempts you have for now 😵 The number you were looking for was ${number}.`);
                 newPrompt = prompt(`Would you like to play another round? (y/n) `);
                 console.clear();
                 exitOrContinue();
+
+            // if there are still attempts remaining and player's guess is incorrect, number of bulls and cows is calculated and result outputted    
             } else {
                 calculation();
                 output();
